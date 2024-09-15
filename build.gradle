@@ -1,0 +1,79 @@
+//docker-compose -f docker-compose.yml up --build
+//update dependencies in project
+//ctrl+ shift +o
+
+//./gradlew build
+
+//./gradlew bootRun --args='-Dfile.encoding=UTF-8'
+//./gradlew bootRun --continuous
+
+//at first - 1 terminal
+//  ./gradlew -t :bootJar
+//then  - 2 terminal
+//  ./gradlew bootRun
+
+//  ./gradlew clean
+
+//    for docker
+//docker-compose -f compose.yaml dow
+// http://localhost:5050 - pg admin
+// Email: admin@admin.com
+// Password: admin
+//172.22.0.2
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.6'
+//    for docker
+    id 'com.palantir.docker' version '0.35.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+
+    // DB dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // JWT dependencies
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // Security dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // Validation dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+}
+
+
+tasks.named('bootRun') {
+    mainClass.set('com.todos.MainApplication')
+}
+
+
+
+
