@@ -37,6 +37,8 @@ It This project is a Java-based Spring Boot application with a PostgreSQL databa
 
 ```bash
 git clone https://github.com/andrey-lawyer/java-spring-todos
+```
+```bash
 cd java-spring-todos
 ```
 
